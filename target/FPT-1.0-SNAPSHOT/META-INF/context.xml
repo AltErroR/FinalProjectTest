@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Context>
+<Resource name="jdbc/salon" auth="Container" type="javax.sql.DataSource"
+          maxTotal="100" maxIdle="50" maxWaitMillis="10000"
+          username="root" password="1111"
+          driverClassName="com.mysql.cj.jdbc.Driver"
+          url="jdbc:mysql://localhost:3306/beauty_salon?useUnicode=true&amp;characterEncoding=UTF-8"/>
+</Context>
