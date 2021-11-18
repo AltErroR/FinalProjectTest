@@ -11,9 +11,10 @@ import java.io.IOException;
 public class EncodingFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(EncodingFilter.class);
 
+
     @Override
     public void init(FilterConfig config) throws ServletException {
-        // NOOP.
+        //notodo
     }
 
     @Override
@@ -22,10 +23,11 @@ public class EncodingFilter implements Filter {
         response.setCharacterEncoding("UTF-8");
         logger.info("request and response encoding set to UTF-8");
         chain.doFilter(request, response);
+
     }
 
     @Override
     public void destroy() {
-        // NOOP
+        // notodo
     }
 }

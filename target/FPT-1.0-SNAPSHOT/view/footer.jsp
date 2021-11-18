@@ -6,14 +6,27 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="resources"/>
 <html>
 <head>
-    <title>Title</title>
 </head>
+<style>
+    #info {
+
+        height: 75px;
+        position: fixed;
+        bottom:0;
+        width:100%;
+        background-color: #eaeaea;
+        opacity: 1;
+    }
+</style>
 <body>
-<footer>
-    <hr>
-    <p style="text-align: center">All rights reserved</p>
+<footer id="info">
+    <br>
+    <p style="text-align: center"><fmt:message key="all rights reserved"/></p>
 </footer>
 </body>
 </html>

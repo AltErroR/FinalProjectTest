@@ -199,10 +199,10 @@ public class MySqlMasterServiceDao implements MasterServiceDao {
         int ammount=0;
         try {
             connection = DBManager.getConnection();
-            ps = connection.prepareStatement(SELECT_MASTER_SERVICES_ID);
+            ps = connection.prepareStatement(COUNT_MASTER_SERVICES);
             rs = ps.executeQuery();
-            while(rs.next()){
-               ammount++;
+            if(rs.next()){
+           ammount=rs.getInt(1);
             }
         } catch (Exception e) {
             logger.error("count row failed");

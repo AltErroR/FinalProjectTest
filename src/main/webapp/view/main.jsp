@@ -8,108 +8,149 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="en"/><%--"${language}"/>--%>
+<fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="resources"/>
 <html>
 <head>
-    <title>Main</title>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet"
+          id="bootstrap-css">
+
+    <title><fmt:message key="mainPage"/></title>
 </head>
 <body>
+
 <jsp:include page="header.jsp"/>
 
+<div style="text-align: center">
+    &emsp; <a href="${pageContext.request.contextPath}/controller?command=mainPageByMaster"><fmt:message key="master"/></a>&emsp;
+    <a href="${pageContext.request.contextPath}/controller?command=mainPageByRating"><fmt:message key="rate"/></a>&emsp;
+    <a href="${pageContext.request.contextPath}/controller?command=mainPageByService"><fmt:message key="service"/></a>&emsp;
+    <hr>
+</div>
 
-    <form action="${pageContext.request.contextPath}/controller?command=mainPageByMasterLogin" method="post">
-        <input name="masterName" type="text" value="" placeholder="input master login"
-               maxlength="45" size="30" pattern="[0-9a-zA-Zа-яА-ЯюЮєЄїЇіІ]{2,45}"/>&emsp;
-        <input type="submit" value="search by this master"><br>
-    </form>
+<div class="well">
+    <table align="center" style="width:70%; text-align: center" class="table">
+        <thead>
 
-    <form action="${pageContext.request.contextPath}/controller?command=mainPageByServiceName" method="post">
-        <input name="serviceName" type="text" value="" placeholder="input service"
-               maxlength="45" size="30" pattern="[0-9a-zA-Zа-яА-ЯюЮєЄїЇіІ]{2,45}"/>&emsp;
-        <input type="submit" value="search by this service"><br>
-    </form>
-<form action="${pageContext.request.contextPath}/controller?command=mainPage" method="post">
-    <input type="hidden" name="command" value="mainPage">
-    <div style="text-align: center">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th><fmt:message key="master"/></th>
+            <th><fmt:message key="service"/></th>
+            <th style="width: 36px;"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="msv" items="${masterServiceList}">
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <td> ${msv.masterLogin}</td>
+                <td>${msv.serviceName}</td>
+            </tr>
 
-        &emsp; <a href="${pageContext.request.contextPath}/controller?command=mainPageByMaster">master Login</a>&emsp;
-        <a href="${pageContext.request.contextPath}/controller?command=mainPageByRating">master Rating</a>&emsp;
-        <a href="${pageContext.request.contextPath}/controller?command=mainPageByService">service Name</a>&emsp;
-        <hr>
-    </div>
-    <c:forEach var="msv" items="${masterServiceList}">
-        <div style="text-align: center">
-            <h3>${msv.masterLogin} : ${msv.serviceName}</h3>
-            <hr>
-        </div>
-    </c:forEach>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
 
-</form>
-<table align="center">
-    <tr>
-        <%--For displaying Previous link except for the 1st page --%>
+<div class="pagination">
+    <ul>
         <c:if test="${currentPage != 1}">
-        <c:if test="${sortBy.equals('master')}">
-        <td><a href="${pageContext.request.contextPath}/controller?command=mainPageByMaster&page=${currentPage - 1}"><
-            Previous</a></td>
 
-        </c:if>
-        <c:if test="${sortBy.equals('service')}">
-        <td><a href="${pageContext.request.contextPath}/controller?command=mainPageByService&page=${currentPage - 1}"><
-            Previous</a></td>
-        </c:if>
-        <c:if test="${sortBy.equals('id')}">
-        <td><a href="${pageContext.request.contextPath}/controller?command=mainPage&page=${currentPage - 1}"><
-            Previous</a></td>
-        </c:if>
-        <c:if test="${sortBy.equals('rating')}">
-        <td><a href="${pageContext.request.contextPath}/controller?command=mainPageByRating&page=${currentPage - 1}"><
-            Previous</a></td>
-        </c:if>
-        <c:if test="${sortBy.equals('masterName')}">
-        <td>
-            <a href="${pageContext.request.contextPath}/controller?command=mainPageByMasterLogin&page=${currentPage - 1}"><
-                Previous</a></td>
-        </c:if>
-        <c:if test="${sortBy.equals('serviceName')}">
-        <td>
-            <a href="${pageContext.request.contextPath}/controller?command=mainPageByServiceName&page=${currentPage - 1}"><
-                Previous</a></td>
+            <c:if test="${sortBy.equals('master')}">
+                <li>
+                    <a href="${pageContext.request.contextPath}/controller?command=mainPageByMaster&page=${currentPage - 1}"><fmt:message key="previous page"/></a>
+                </li>
+            </c:if>
+
+            <c:if test="${sortBy.equals('service')}">
+                <li>
+                    <a href="${pageContext.request.contextPath}/controller?command=mainPageByService&page=${currentPage - 1}"><fmt:message key="previous page"/></a>
+                </li>
+            </c:if>
+
+            <c:if test="${sortBy.equals('id')}">
+                <li><a href="${pageContext.request.contextPath}/controller?command=mainPage&page=${currentPage - 1}"><fmt:message key="previous page"/></a>
+                </li>
+            </c:if>
+
+            <c:if test="${sortBy.equals('rating')}">
+                <li>
+                    <a href="${pageContext.request.contextPath}/controller?command=mainPageByRating&page=${currentPage - 1}"><fmt:message key="previous page"/></a>
+                </li>
+            </c:if>
+
+            <c:if test="${sortBy.equals('masterName')}">
+                <li>
+                    <a href="${pageContext.request.contextPath}/controller?command=mainPageByMasterLogin&page=${currentPage - 1}"><fmt:message key="previous page"/></a>
+                </li>
+            </c:if>
+
+            <c:if test="${sortBy.equals('serviceName')}">
+                <li>
+                    <a href="${pageContext.request.contextPath}/controller?command=mainPageByServiceName&page=${currentPage - 1}"><fmt:message key="previous page"/></a>
+                </li>
+            </c:if>
         </c:if>
 
-        </c:if>
-        <%--For displaying Next link --%>
         <c:if test="${currentPage le noOfPages}">
 
-        <c:if test="${sortBy.equals('master')}">
-        <td><a href="${pageContext.request.contextPath}/controller?command=mainPageByMaster&page=${currentPage + 1}">Next
-            ></a></td>
+            <c:if test="${sortBy.equals('master')}">
+                <li>
+                    <a href="${pageContext.request.contextPath}/controller?command=mainPageByMaster&page=${currentPage + 1}">Next</a>
+                </li>
+            </c:if>
+
+            <c:if test="${sortBy.equals('service')}">
+                <li>
+                    <a href="${pageContext.request.contextPath}/controller?command=mainPageByService&page=${currentPage + 1}">Next</a>
+                </li>
+            </c:if>
+
+            <c:if test="${sortBy.equals('id')}">
+                <li>
+                    <a href="${pageContext.request.contextPath}/controller?command=mainPage&page=${currentPage + 1}"><fmt:message key="next page"/></a>
+                </li>
+            </c:if>
+
+            <c:if test="${sortBy.equals('rating')}">
+                <li>
+                    <a href="${pageContext.request.contextPath}/controller?command=mainPageByRating&page=${currentPage + 1}"><fmt:message key="next page"/></a>
+                </li>
+            </c:if>
+
+            <c:if test="${sortBy.equals('masterName')}">
+                <li>
+                    <a href="${pageContext.request.contextPath}/controller?command=mainPageByMasterLogin&page=${currentPage + 1}"><fmt:message key="next page"/></a>
+                </li>
+            </c:if>
+
+            <c:if test="${sortBy.equals('serviceName')}">
+                <li>
+                    <a href="${pageContext.request.contextPath}/controller?command=mainPageByServiceName&page=${currentPage + 1}"><fmt:message key="next page"/></a>
+                </li>
+            </c:if>
 
         </c:if>
-        <c:if test="${sortBy.equals('service')}">
-        <td><a href="${pageContext.request.contextPath}/controller?command=mainPageByService&page=${currentPage + 1}">Next
-            ></a></td>
-        </c:if>
-        <c:if test="${sortBy.equals('id')}">
-        <td><a href="${pageContext.request.contextPath}/controller?command=mainPage&page=${currentPage + 1}">Next ></a>
-        </td>
-        </c:if>
-        <c:if test="${sortBy.equals('rating')}">
-        <td><a href="${pageContext.request.contextPath}/controller?command=mainPageByRating&page=${currentPage + 1}">Next
-            ></a></td>
-        </c:if>
-        <c:if test="${sortBy.equals('masterName')}">
-        <td>
-            <a href="${pageContext.request.contextPath}/controller?command=mainPageByMasterLogin&page=${currentPage + 1}">Next
-                ></a></td>
-        </c:if>
-        <c:if test="${sortBy.equals('serviceName')}">
-        <td>
-            <a href="${pageContext.request.contextPath}/controller?command=mainPageByServiceName&page=${currentPage + 1}">Next
-                ></a></td>
-        </c:if>
-        </c:if>
-</table>
+    </ul>
+</div>
+
+<form action="${pageContext.request.contextPath}/controller?command=mainPageByMasterLogin" method="post">
+    <input name="master" type="text" value="" placeholder=<fmt:message key="input master"/>
+           maxlength="45" size="30" pattern="[0-9a-zA-Zа-яА-ЯюЮєЄїЇіІ]{2,45}"/>&emsp;
+    <input type="submit" value="<fmt:message key="find by master"/>"><br>
+</form>
+
+<form action="${pageContext.request.contextPath}/controller?command=mainPageByServiceName" method="post">
+    <input name="service" type="text" value="" placeholder=<fmt:message key="input service"/>
+           maxlength="45" size="30" pattern="[0-9a-zA-Zа-яА-ЯюЮєЄїЇіІ]{2,45}"/>&emsp;
+    <input type="submit" value="<fmt:message key="find by service"/>"><br>
+</form>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

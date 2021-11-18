@@ -21,7 +21,7 @@ import java.util.List;
 import static com.my.constants.SQLConstants.*;
 
 public class MainPageServiceImpl implements MainPageService {
-    private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(MainPageServiceImpl.class);
     MySqlMasterServiceDao mySqlMasterServiceDao= new MySqlMasterServiceDao();
     List<MasterService> masterServiceList = new ArrayList<>();
     int noOfRecords=mySqlMasterServiceDao.getAmmount();
@@ -30,7 +30,6 @@ public class MainPageServiceImpl implements MainPageService {
 
     @Override
     public String mainPageInitialization(String query,HttpServletResponse response,HttpServletRequest request) throws ServletException, IOException {
-        HttpSession session= request.getSession(false);
 
         if(noOfRecords==0){
             logger.warn("no data in master_service table");
@@ -38,14 +37,13 @@ public class MainPageServiceImpl implements MainPageService {
         }
         if(request.getParameter("page") != null)
             page = Integer.parseInt(request.getParameter("page"));
-        int noOfPages = (int) Math.ceil(noOfRecords / recordsPerPage);
+        int noOfPages = (noOfRecords / recordsPerPage);
 
-
-        if(query.equals(SQL_SUBLIST_BY_MASTER_NAME)&&request.getParameter("masterName")!=null){
-            masterServiceList = mySqlMasterServiceDao.getAllMasterServicesByName(query,request.getParameter("masterName"),(page-1)*recordsPerPage, recordsPerPage);
+        if(query.equals(SQL_SUBLIST_BY_MASTER_NAME)&&request.getParameter("master")!=null){
+            masterServiceList = mySqlMasterServiceDao.getAllMasterServicesByName(query,request.getParameter("master"),(page-1)*recordsPerPage, recordsPerPage);
         }
-        else if(query.equals(SQL_SUBLIST_BY_SERVICE_NAME)&&request.getParameter("serviceName")!=null){
-            masterServiceList = mySqlMasterServiceDao.getAllMasterServicesByName(query,request.getParameter("serviceName"),(page-1)*recordsPerPage, recordsPerPage);
+        else if(query.equals(SQL_SUBLIST_BY_SERVICE_NAME)&&request.getParameter("service")!=null){
+            masterServiceList = mySqlMasterServiceDao.getAllMasterServicesByName(query,request.getParameter("service"),(page-1)*recordsPerPage, recordsPerPage);
         }
         else {
             masterServiceList = mySqlMasterServiceDao.getAllMasterServices(query, (page - 1) * recordsPerPage, recordsPerPage);
@@ -57,30 +55,28 @@ public class MainPageServiceImpl implements MainPageService {
         if (query.equals(SQL_SUBLIST_BY_MASTER)) {
             logger.info("list sorted by master");
             request.setAttribute("sortBy", "master");
-            return "view/main.jsp?command=mainPageByMaster";
         }
         if (query.equals(SQL_SUBLIST_BY_SERVICE)) {
             logger.info("list sorted by service");
             request.setAttribute("sortBy", "service");
-            return "view/main.jsp?command=mainPageByService";
         }
         if (query.equals(SQL_SUBLIST_BY_RATING)) {
             logger.info("list sorted by rating");
             request.setAttribute("sortBy", "rating");
-            return "view/main.jsp?command=mainPageByRating";
         }
         if (query.equals(SQL_SUBLIST_BY_MASTER_NAME)) {
             logger.info("list sorted by master login");
             request.setAttribute("sortBy", "masterName");
-            return "view/main.jsp?command=mainPageByMasterLogin";
         }
         if (query.equals(SQL_SUBLIST_BY_SERVICE_NAME)) {
             logger.info("list sorted by service name");
             request.setAttribute("sortBy", "serviceName");
-            return "view/main.jsp?command=mainPageByServiceName";
         }
-        request.setAttribute("sortBy", "id");
-        logger.info("list sorted by id");
-        return "view/main.jsp?command=mainPage";
+        if (query.equals(SQL_SUBLIST_BY_ID)) {
+            request.setAttribute("sortBy", "id");
+            logger.info("list sorted by id");
+        }
+
+        return "view/main.jsp";
     }
 }

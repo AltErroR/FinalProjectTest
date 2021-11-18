@@ -8,25 +8,27 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="resources"/>
 <html>
 <head>
-    <title>Feedback</title>
+    <title><fmt:message key="feedback"/></title>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<h2>Feedback</h2>
+<h2 align="center"><fmt:message key="feedback"/></h2>
 <form action="${pageContext.request.contextPath}/controller" method="POST">
     <input type="hidden" name="command" value="orders">
     <div>
         <div style="text-align: center;"/>
         <br><br>
-        <table>
+        <table align="center" style="width:70%; text-align: center" class="table">
             <tr>
-                <td>Id</td>
-                <td>Login</td>
-                <td>Service</td>
-                <td>Time</td>
-                <td>Date</td>
+                <td><fmt:message key="id"/></td>
+                <td><fmt:message key="login"/></td>
+                <td><fmt:message key="service"/></td>
+                <td><fmt:message key="time"/></td>
+                <td><fmt:message key="date"/></td>
 
             </tr>
             <c:forEach var="order" items="${ordersList}">
@@ -47,11 +49,11 @@
     <input type="hidden" name="command" value="feedbackWrite">
     <div>
         <div style="text-align: center;"/>
-        <textarea rows="7" cols="80" name="message" placeholder="Input message, if you will">
+        <textarea align="center" style="width:70%" rows="7" cols="80"  name="message" placeholder=<fmt:message key="input message"/>>
         </textarea><br><br>
-        <input type="text" placeholder="Input master" name="master" required/><br><br>
-        <label for="rate">Which mark would you leave ?</label><br>
-        <select name="rate" id="rate" multiple>
+        <input align="center"  type="text" placeholder=<fmt:message key="input master"/> name="master" required/><br><br>
+        <label for="rate"><fmt:message key="which mark would you leave"/></label><br>
+        <select style="alignment: center"   style="width:10%" name="rate" id="rate" multiple>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -64,9 +66,10 @@
             <option value="10">10</option>
         </select>
         <br><br>
-        <input type="submit" value="Submit">
+        <input align="center" type="submit" value="<fmt:message key="submit"/>">
 
     </div>
 </form>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

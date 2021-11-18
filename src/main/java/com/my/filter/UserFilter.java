@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-//@WebFilter("/*")
+@WebFilter("/*")
 public class UserFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(UserFilter.class);
     @Override
@@ -49,7 +49,10 @@ public class UserFilter implements Filter {
                 !"/FPT/controller?command=success".equals(fullpath) &&
                 !"/FPT/controller?command=mainPage".equals(fullpath) &&
                 !"/FPT/controller?command=mainPageByMaster".equals(fullpath) &&
-                !"/FPT/controller?command=mainPageByService".equals(fullpath)&&
+                !"/FPT/controller?command=mainPageByService".equals(fullpath) &&
+                !"/FPT/controller?command=mainPageByRating".equals(fullpath) &&
+                !"/FPT/controller?command=mainPageByMasterLogin".equals(fullpath) &&
+                !"/FPT/controller?command=mainPageByServiceName".equals(fullpath) &&
                 !"/FPT/controller?command=booking".equals(fullpath) &&
                 !"/FPT/controller?command=login".equals(fullpath) &&
                 !"/FPT/controller?command=logout".equals(fullpath)){

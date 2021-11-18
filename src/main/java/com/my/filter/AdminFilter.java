@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-//@WebFilter("/*")
+@WebFilter("/*")
 public class AdminFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(AdminFilter.class);
     @Override
@@ -50,6 +50,9 @@ public class AdminFilter implements Filter {
                 !"/FPT/controller?command=mainPage".equals(fullpath) &&
                 !"/FPT/controller?command=mainPageByMaster".equals(fullpath) &&
                 !"/FPT/controller?command=mainPageByService".equals(fullpath) &&
+                !"/FPT/controller?command=mainPageByRating".equals(fullpath) &&
+                !"/FPT/controller?command=mainPageByMasterLogin".equals(fullpath) &&
+                !"/FPT/controller?command=mainPageByServiceName".equals(fullpath) &&
                 !"/FPT/controller?command=paymentAccept".equals(fullpath) &&
                 !"/FPT/controller?command=payment".equals(fullpath) &&
                 !"/FPT/controller?command=feedback".equals(fullpath)) {

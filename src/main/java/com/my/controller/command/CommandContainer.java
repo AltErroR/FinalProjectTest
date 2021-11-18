@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommandContainer {
-    private static final Logger logger = LoggerFactory.getLogger(Controller.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommandContainer.class);
     private static Map<String,Command> commands= new HashMap<>();
     static {
         commands.put("adminHomeInit",new AdminHomeCommand());
@@ -33,9 +33,10 @@ public class CommandContainer {
         commands.put("paymentAccept",new PaymentAcceptCommand());
         commands.put("statusChange",new StatusChangeCommand());
         commands.put("success",new SuccessCommand());
+        commands.put("changeLanguage",new ChangeLanguageCommand());
     }
     public static Command getCommand(String commandName){
-        logger.debug("command "+ commandName+" invoked");
+        logger.debug("command: {} invoked ", commandName);
         return commands.get(commandName);
     }
 

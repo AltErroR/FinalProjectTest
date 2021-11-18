@@ -78,6 +78,7 @@ public class SQLConstants {
     public static final String SELECT_MASTER_SERVICES ="SELECT * FROM beauty_salon.service_master WHERE (id = ?)";
     public static final String DELETE_MASTER_SERVICES ="DELETE FROM  beauty_salon.service_master WHERE (id= ?)";
     public static final String SELECT_MASTER_SERVICES_ID ="SELECT id FROM beauty_salon.service_master";
+    public static final String COUNT_MASTER_SERVICES = "select count(*) from service_master";
     public static final String SQL_SUBLIST_BY_ID = "SELECT * FROM beauty_salon.service_master ORDER BY id LIMIT ? OFFSET ?";
     public static final String SQL_SUBLIST_BY_MASTER = "SELECT * FROM beauty_salon.service_master ORDER BY login_master LIMIT ? OFFSET ?";
     public static final String SQL_SUBLIST_BY_SERVICE = "SELECT * FROM beauty_salon.service_master ORDER BY name_service LIMIT ? OFFSET ?";

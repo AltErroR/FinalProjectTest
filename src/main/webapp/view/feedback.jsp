@@ -8,21 +8,24 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="resources"/>
 <html>
 <head>
-    <title>Title</title>
+    <title><fmt:message key="feedbacks"/></title>
 </head>
 <body>
-<h2>Feedbacks</h2>
+<jsp:include page="header.jsp"/>
+<h2 align="center">Feedbacks</h2>
 <form action="${pageContext.request.contextPath}/controller" method="post">
     <input type="hidden" name="command" value="feedback">
-    <table style="width:70%">
+    <table align="center" style="width:70%; text-align: center" class="table">
         <tr>
-            <th>Id</th>
-            <th>User</th>
-            <th>Master</th>
-            <th>Rate</th>
-            <th>Feedback</th>
+            <th><fmt:message key="id"/></th>
+            <th><fmt:message key="user"/></th>
+            <th><fmt:message key="master"/></th>
+            <th><fmt:message key="rate"/></th>
+            <th><fmt:message key="feedback"/></th>
         </tr>
         <tr>
             <c:forEach var="fv" items="${feedbackList}">
@@ -37,5 +40,6 @@
         </tr>
     </table>
 </form>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>
