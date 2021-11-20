@@ -3,8 +3,6 @@ package com.my.dao.mysql;
 import com.my.dao.DBManager;
 import com.my.dao.MasterServiceDao;
 import com.my.entity.MasterService;
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,7 +61,7 @@ public class MySqlMasterServiceDao implements MasterServiceDao {
 
     @Override
     public MasterService getMasterService(int id) {
-        MasterService masterService = null;
+        MasterService masterService;
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -192,28 +190,27 @@ public class MySqlMasterServiceDao implements MasterServiceDao {
 
 
     @Override
-    public int getAmmount() {
+    public int getAmount() {
         Connection connection=null;
         PreparedStatement ps=null;
         ResultSet rs = null;
-        int ammount=0;
+        int amount=0;
         try {
             connection = DBManager.getConnection();
             ps = connection.prepareStatement(COUNT_MASTER_SERVICES);
             rs = ps.executeQuery();
             if(rs.next()){
-           ammount=rs.getInt(1);
+           amount=rs.getInt(1);
             }
         } catch (Exception e) {
-            logger.error("count row failed");
-            throw new RuntimeException(e.getMessage());
+            logger.error("count row failed reason is {}",e.getMessage());
         }
         finally {
             DBManager.close(rs);
             DBManager.close(ps);
             DBManager.close(connection);
         }
-        return ammount;
+        return amount;
     }
 
 }

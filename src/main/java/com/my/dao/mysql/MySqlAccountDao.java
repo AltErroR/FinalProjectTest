@@ -3,8 +3,6 @@ package com.my.dao.mysql;
 import com.my.dao.AccountDao;
 import com.my.dao.DBManager;
 import com.my.entity.Account;
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,7 +63,7 @@ public class MySqlAccountDao implements AccountDao {
 
     @Override
     public Account getAccount(int id) {
-        Account account = null;
+        Account account;
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -91,7 +89,7 @@ public class MySqlAccountDao implements AccountDao {
 
     @Override
     public Account getAccount(String login) {
-        Account account = null;
+        Account account;
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;

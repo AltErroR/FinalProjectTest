@@ -1,39 +1,40 @@
 package com.my.controller.command;
 
-import com.my.controller.Controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.my.constants.Constants.*;
+
 public class CommandContainer {
     private static final Logger logger = LoggerFactory.getLogger(CommandContainer.class);
-    private static Map<String,Command> commands= new HashMap<>();
+    private static final Map<String,Command> commands= new HashMap<>();
     static {
-        commands.put("adminHomeInit",new AdminHomeCommand());
-        commands.put("booking",new BookingCommand());
-        commands.put("creation",new AccountCreationCommand());
-        commands.put("error",new ErrorCommand());
-        commands.put("feedback",new FeedbackCommand());
-        commands.put("feedbackWrite",new FeedbackWriteCommand());
-        commands.put("home",new HomePageCommand());
-        commands.put("login",new LoginCommand());
-        commands.put("logout",new LogoutCommand());
-        commands.put("mainPage",new MainPageCommand());
-        commands.put("mainPageByMaster",new SortByMasterCommand());
-        commands.put("mainPageByService",new SortByServiceCommand());
-        commands.put("mainPageByRating",new SortByRatingCommand());
-        commands.put("mainPageByMasterLogin",new SortByMasterLoginCommand());
-        commands.put("mainPageByServiceName",new SortByServiceNameCommand());
-        commands.put("masterHomeInit",new MasterHomeInitCommand());
-        commands.put("orders",new OrdersCommand());
-        commands.put("orderChange",new OrderChangeCommand());
-        commands.put("payment",new PaymentCommand());
-        commands.put("paymentAccept",new PaymentAcceptCommand());
-        commands.put("statusChange",new StatusChangeCommand());
-        commands.put("success",new SuccessCommand());
-        commands.put("changeLanguage",new ChangeLanguageCommand());
+        commands.put(ADMIN_HOME,new AdminHomeCommand());
+        commands.put(BOOKING,new BookingCommand());
+        commands.put(CREATION,new AccountCreationCommand());
+        commands.put(ERROR,new ErrorCommand());
+        commands.put(FEEDBACK,new FeedbackCommand());
+        commands.put(WRITE_FEEDBACK,new FeedbackWriteCommand());
+        commands.put(HOME,new HomePageCommand());
+        commands.put(LOGIN,new LoginCommand());
+        commands.put(LOG_OUT,new LogoutCommand());
+        commands.put(MAIN,new MainPageCommand());
+        commands.put(MAIN_MASTER,new SortByMasterCommand());
+        commands.put(MAIN_SERVICE,new SortByServiceCommand());
+        commands.put(MAIN_RATING,new SortByRatingCommand());
+        commands.put(MAIN_MASTER_NAME,new SortByMasterLoginCommand());
+        commands.put(MAIN_SERVICE_NAME,new SortByServiceNameCommand());
+        commands.put(MASTER_HOME,new MasterHomeInitCommand());
+        commands.put(ORDERS,new OrdersCommand());
+        commands.put(CHANGE_ORDER,new OrderChangeCommand());
+        commands.put(PAYMENT,new PaymentCommand());
+        commands.put(ACCEPT_PAYMENT,new PaymentAcceptCommand());
+        commands.put(CHANGE_STATUS,new StatusChangeCommand());
+        commands.put(SUCCESS,new SuccessCommand());
+        commands.put(CHANGE_LANGUAGE,new ChangeLanguageCommand());
     }
     public static Command getCommand(String commandName){
         logger.debug("command: {} invoked ", commandName);

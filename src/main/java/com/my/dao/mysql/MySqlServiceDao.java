@@ -2,10 +2,7 @@ package com.my.dao.mysql;
 
 import com.my.dao.DBManager;
 import com.my.dao.ServiceDao;
-import com.my.entity.Feedback;
 import com.my.entity.Service;
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

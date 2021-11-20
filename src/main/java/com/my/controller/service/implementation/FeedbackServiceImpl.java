@@ -1,6 +1,5 @@
-package com.my.controller.service.imlementation;
+package com.my.controller.service.implementation;
 
-import com.my.controller.command.FeedbackCommand;
 import com.my.controller.service.FeedbackService;
 import com.my.dao.mysql.MySqlFeedbackDao;
 import com.my.entity.Feedback;
@@ -11,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.my.constants.Constants.*;
 
 public class FeedbackServiceImpl implements FeedbackService {
     private static final Logger logger = LoggerFactory.getLogger(FeedbackServiceImpl.class);
@@ -23,16 +24,16 @@ public class FeedbackServiceImpl implements FeedbackService {
             logger.warn("feedbacks list is clear");
             throw  new Exception("No feedbacks yet");
         }
-        request.setAttribute("feedbackList",feedbacks);
+        request.setAttribute(FEEDBACK_LIST,feedbacks);
         logger.debug("success");
-        return "view/feedback.jsp";
+        return FEEDBACK_JSP;
     }
     @Override
     public String feedbackWrite(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int userId =(int) request.getSession().getAttribute("userId");
-        String message=request.getParameter("message");
-        String rate=request.getParameter("rate");
-        String masterLogin=request.getParameter("master");
+        int userId =(int) request.getSession().getAttribute(USER_ID);
+        String message=request.getParameter(MESSAGE);
+        String rate=request.getParameter(RATE);
+        String masterLogin=request.getParameter(MASTER);
         Feedback feedback=mySqlFeedbackDao.getFeedback(userId,  masterLogin);
         if(feedback!=null){
             logger.warn("feedbacks insertion to bd failed");
@@ -42,7 +43,7 @@ public class FeedbackServiceImpl implements FeedbackService {
         feedback=mySqlFeedbackDao.getFeedback(userId,  masterLogin);
         mySqlFeedbackDao.updateFeedback(feedback.getId(),userId,masterLogin,message,rate);
         logger.debug("success");
-        return "view/success.jsp";
+        return SUCCESS_JSP;
     }
     
 }

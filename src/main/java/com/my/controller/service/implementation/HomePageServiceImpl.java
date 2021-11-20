@@ -1,9 +1,10 @@
-package com.my.controller.service.imlementation;
+package com.my.controller.service.implementation;
 
-import com.my.controller.command.HomePageCommand;
 import com.my.controller.service.HomePageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static com.my.constants.Constants.*;
 
 public class HomePageServiceImpl implements HomePageService {
     private static final Logger logger = LoggerFactory.getLogger(HomePageServiceImpl.class);
@@ -12,13 +13,13 @@ public class HomePageServiceImpl implements HomePageService {
         switch (role) {
             case ("master"):
                 logger.debug("master homepage");
-                return "/FPT/controller?command=masterHomeInit";
+                return MASTER_HOMEPAGE_COMMAND;
             case ("admin"):
                 logger.debug("admin homepage");
-                return "/FPT/controller?command=adminHomeInit";
+                return ADMIN_HOMEPAGE_COMMAND;
             default:
                 logger.debug("user homepage");
-                return "/FPT/controller?command=mainPage";
+                return MAIN_PAGE_COMMAND;
         }
     }
 }

@@ -43,17 +43,23 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="msv" items="${masterServiceList}">
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <td> ${msv.masterLogin}</td>
-                <td>${msv.serviceName}</td>
-            </tr>
+<%--        <c:if test="${masterServiceList!=null&&masterServiceList.size()>0}">--%>
+<%--            <c:out value="${masterServiceList}"/><br>--%>
+<%--            <c:out value="${sessionScope.masterServiceList}"/>--%>
+            <c:forEach var="msv" items="${sessionScope.masterServiceList}">
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <td> ${msv.masterLogin}</td>
+                    <td>${msv.serviceName}</td>
+                </tr>
 
-        </c:forEach>
+            </c:forEach>
+<%--        </c:if>--%>
+<%--        <c:if test="${masterServiceList==null}">null <c:out value="${masterServiceList}"/><br> <c:out value="${sessionScope.masterServiceList}"/></c:if>--%>
+<%--        <c:if test="${masterServiceList.size()<=0}">size 0 <c:out value="${masterServiceList}"/> <br><c:out value="${sessionScope.masterServiceList}"/></c:if>--%>
         </tbody>
     </table>
 </div>

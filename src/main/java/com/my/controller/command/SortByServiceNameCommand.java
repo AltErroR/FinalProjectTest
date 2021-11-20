@@ -1,6 +1,6 @@
 package com.my.controller.command;
 
-import com.my.controller.service.imlementation.MainPageServiceImpl;
+import com.my.controller.service.implementation.MainPageServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +14,6 @@ public class SortByServiceNameCommand implements Command {
     MainPageServiceImpl mainPageServiceImplementation= new MainPageServiceImpl();
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        //todo
         logger.debug("try to sort data on main by master login");
         return mainPageServiceImplementation.mainPageInitialization(SQL_SUBLIST_BY_SERVICE_NAME,response,request);
     }

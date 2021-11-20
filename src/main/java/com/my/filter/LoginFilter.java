@@ -6,16 +6,17 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
+import static com.my.constants.Constants.*;
 
 @WebFilter("/*")
 public class LoginFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(LoginFilter.class);
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        //notodo
     }
 
     @Override
@@ -28,30 +29,34 @@ public class LoginFilter implements Filter {
         if (session != null) {
             fullpath = path + '?' + request.getQueryString();
         }
+        if (fullpath.contains("language=uk")||fullpath.contains("language=en")) {
+            fullpath =  path + '?' +"command=changeLanguage";
+        }
         if (fullpath.contains("&")) {
             fullpath = fullpath.substring(0, fullpath.indexOf("&"));
         }
-        if ((null == session || null == session.getAttribute("role")) &&
-                (!"/FPT/view/accountCreation.jsp".equals(path) &&
-                        !"/FPT/view/authorization.jsp".equals(path) &&
-                        !"/FPT/view/success.jsp".equals(path) &&
-                        !"/FPT/view/error.jsp".equals(path) &&
-                        !"/FPT/view/header.jsp".equals(path) &&
-                        !"/FPT/view/footer.jsp".equals(path) &&
-                        !"/FPT/view/main.jsp".equals(path) &&
-                        !"/FPT/index.jsp".equals(path) &&
-                        !"/FPT/".equals(path) &&
+        if ((null == session || null == session.getAttribute(ROLE)) &&
+                (!ACCOUNT_CREATION_JSP_PATH.equals(path) &&
+                        !AUTHORIZATION_JSP_PATH.equals(path) &&
+                        !SUCCESS_JSP_PATH.equals(path) &&
+                        !ERROR_JSP_PATH.equals(path) &&
+                        !HEADER_JSP_PATH.equals(path) &&
+                        !FOOTER_JSP_PATH.equals(path) &&
+                        !MAIN_JSP_PATH.equals(path) &&
+                        !INDEX_JSP_PATH.equals(path) &&
+                        !FPT.equals(path) &&
 
-                        !"/FPT/controller?command=creation".equals(fullpath) &&
-                        !"/FPT/controller?command=login".equals(fullpath) &&
-                        !"/FPT/controller?command=error".equals(fullpath) &&
-                        !"/FPT/controller?command=success".equals(fullpath) &&
-                        !"/FPT/controller?command=mainPage".equals(fullpath) &&
-                        !"/FPT/controller?command=mainPageByMaster".equals(fullpath) &&
-                        !"/FPT/controller?command=mainPageByService".equals(fullpath) &&
-                        !"/FPT/controller?command=mainPageByRating".equals(fullpath) &&
-                        !"/FPT/controller?command=mainPageByMasterLogin".equals(fullpath) &&
-                        !"/FPT/controller?command=mainPageByServiceName".equals(fullpath)
+                        !CREATION_COMMAND.equals(fullpath) &&
+                        !LOGIN_COMMAND.equals(fullpath) &&
+                        !ERROR_COMMAND.equals(fullpath) &&
+                        !SUCCESS_COMMAND.equals(fullpath) &&
+                        !MAIN_PAGE_COMMAND.equals(fullpath) &&
+                        !SORT1_COMMAND.equals(fullpath) &&
+                        !SORT2_COMMAND.equals(fullpath) &&
+                        !SORT3_COMMAND.equals(fullpath) &&
+                        !SORT4_COMMAND.equals(fullpath) &&
+                        !SORT5_COMMAND.equals(fullpath)&&
+                        !CHANGE_LANGUAGE_COMMAND.equals(fullpath)
                 )) {
             logger.info("unauthorized user tried to access permitted pages");
             request.getRequestDispatcher("/view/authorization.jsp").forward(req, resp);
@@ -63,6 +68,6 @@ public class LoginFilter implements Filter {
 
     @Override
     public void destroy() {
-
+        //notodo
     }
 }

@@ -3,8 +3,6 @@ package com.my.dao.mysql;
 import com.my.dao.AdminDao;
 import com.my.dao.DBManager;
 import com.my.entity.Admin;
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +37,7 @@ public class MySqlAdminDao implements AdminDao {
 
     @Override
     public Admin getAdmin(int id) {
-        Admin admin = null;
+        Admin admin;
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;

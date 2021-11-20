@@ -1,11 +1,12 @@
-package com.my.controller.service.imlementation;
+package com.my.controller.service.implementation;
 
-import com.my.controller.command.BookingCommand;
 import com.my.controller.service.BookingService;
 import com.my.dao.mysql.MySqlOrderDao;
 import com.my.entity.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static com.my.constants.Constants.SUCCESS_JSP;
 
 
 public class BookingServiceImpl implements BookingService {
@@ -22,6 +23,6 @@ public class BookingServiceImpl implements BookingService {
         }
         mySqlOrderDao.createOrder(masterLogin,userId,serviceName,timeSlot,dateSlot);
         logger.debug("reservation done");
-        return "view/success.jsp";
+        return SUCCESS_JSP;
     }
 }

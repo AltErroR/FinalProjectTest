@@ -6,16 +6,17 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
+import static com.my.constants.Constants.*;
 
 @WebFilter("/*")
 public class AdminFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(AdminFilter.class);
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        //notodo
     }
 
     @Override
@@ -28,36 +29,41 @@ public class AdminFilter implements Filter {
         if (session != null) {
             fullpath = path + '?' + request.getQueryString();
         }
+        if (fullpath.contains("language=uk")||fullpath.contains("language=en")) {
+            fullpath =  path + '?' +"command=changeLanguage";
+        }
         if (fullpath.contains("&")) {
             fullpath = fullpath.substring(0, fullpath.indexOf("&"));
         }
-        if ((null != session && null != session.getAttribute("role")) &&
-                "admin".equals(session.getAttribute("role")) &&
-                !"/FPT/view/success.jsp".equals(path) &&
-                !"/FPT/view/error.jsp".equals(path) &&
-                !"/FPT/view/adminHome.jsp".equals(path) &&
-                !"/FPT/view/feedback.jsp".equals(path) &&
-                !"/FPT/view/footer.jsp".equals(path) &&
-                !"/FPT/view/header.jsp".equals(path) &&
-                !"/FPT/view/main.jsp".equals(path) &&
+        if ((null != session && null != session.getAttribute(ROLE)) &&
+                ADMIN.equals(session.getAttribute(ROLE)) &&
+                !SUCCESS_JSP_PATH.equals(path) &&
+                !ERROR_JSP_PATH.equals(path) &&
+                !ADMIN_HOME_JSP_PATH.equals(path) &&
+                !FEEDBACK_JSP_PATH.equals(path) &&
+                !FOOTER_JSP_PATH.equals(path) &&
+                !HEADER_JSP_PATH.equals(path) &&
+                !MAIN_JSP_PATH.equals(path) &&
 
-                !"/FPT/controller?command=logout".equals(fullpath) &&
-                !"/FPT/controller?command=login".equals(fullpath) &&
-                !"/FPT/controller?command=error".equals(fullpath) &&
-                !"/FPT/controller?command=success".equals(fullpath) &&
-                !"/FPT/controller?command=adminHomeInit".equals(fullpath) &&
-                !"/FPT/controller?command=orderChange".equals(fullpath) &&
-                !"/FPT/controller?command=mainPage".equals(fullpath) &&
-                !"/FPT/controller?command=mainPageByMaster".equals(fullpath) &&
-                !"/FPT/controller?command=mainPageByService".equals(fullpath) &&
-                !"/FPT/controller?command=mainPageByRating".equals(fullpath) &&
-                !"/FPT/controller?command=mainPageByMasterLogin".equals(fullpath) &&
-                !"/FPT/controller?command=mainPageByServiceName".equals(fullpath) &&
-                !"/FPT/controller?command=paymentAccept".equals(fullpath) &&
-                !"/FPT/controller?command=payment".equals(fullpath) &&
-                !"/FPT/controller?command=feedback".equals(fullpath)) {
+                !LOG_OUT_COMMAND_PATH.equals(fullpath) &&
+                !LOGIN_COMMAND.equals(fullpath) &&
+                !ERROR_COMMAND.equals(fullpath) &&
+                !SUCCESS_COMMAND.equals(fullpath) &&
+                !ADMIN_HOME_COMMAND.equals(fullpath) &&
+                !ORDER_CHANGE_COMMAND.equals(fullpath) &&
+                !MAIN_PAGE_COMMAND.equals(fullpath) &&
+                !SORT1_COMMAND.equals(fullpath) &&
+                !SORT2_COMMAND.equals(fullpath) &&
+                !SORT3_COMMAND.equals(fullpath) &&
+                !SORT4_COMMAND.equals(fullpath) &&
+                !SORT5_COMMAND.equals(fullpath) &&
+                !ACCEPT_PAYMENT_COMMAND.equals(fullpath) &&
+                !PAYMENT_COMMAND.equals(fullpath) &&
+                !FEEDBACK_COMMAND.equals(fullpath)&&
+                !CHANGE_LANGUAGE_COMMAND.equals(fullpath)
+        ){
             logger.info("admin tried to access permitted pages");
-            request.getRequestDispatcher("/view/adminHome.jsp").forward(req, resp);
+            request.getRequestDispatcher(ADMIN_HOME_JSP).forward(req, resp);
             return;
         }
         logger.info("admin access granted");
@@ -66,7 +72,7 @@ public class AdminFilter implements Filter {
 
     @Override
     public void destroy() {
-
+        //notodo
     }
 }
 

@@ -9,13 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static com.my.constants.Constants.*;
+
 
 @WebFilter("/*")
 public class MasterFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(MasterFilter.class);
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        //notodo
     }
 
     @Override
@@ -28,30 +30,35 @@ public class MasterFilter implements Filter {
         if (session != null) {
             fullpath = path + '?' + request.getQueryString();
         }
+        if (fullpath.contains("language=uk")||fullpath.contains("language=en")) {
+            fullpath =  path + '?' +"command=changeLanguage";
+        }
         if (fullpath.contains("&")) {
             fullpath = fullpath.substring(0, fullpath.indexOf("&"));
         }
-        if ((null != session && null != session.getAttribute("role")) &&
-                "master".equals(session.getAttribute("role")) &&
-                !"/FPT/view/success.jsp".equals(path) &&
-                !"/FPT/view/error.jsp".equals(path) &&
-                !"/FPT/view/masterHome.jsp".equals(path) &&
-                !"/FPT/view/feedback.jsp".equals(path) &&
-                !"/FPT/view/footer.jsp".equals(path) &&
-                !"/FPT/view/header.jsp".equals(path) &&
-                !"/FPT/view/main.jsp".equals(path) &&
+        if ((null != session && null != session.getAttribute(ROLE)) &&
+                MASTER.equals(session.getAttribute(ROLE)) &&
+                !SUCCESS_JSP_PATH.equals(path) &&
+                !ERROR_JSP_PATH.equals(path) &&
+                !MASTER_HOME_JSP_PATH.equals(path) &&
+                !FEEDBACK_JSP_PATH.equals(path) &&
+                !FOOTER_JSP_PATH.equals(path) &&
+                !HEADER_JSP_PATH.equals(path) &&
+                !MAIN_JSP_PATH.equals(path) &&
 
-                !"/FPT/controller?command=feedback".equals(fullpath) &&
-                !"/FPT/controller?command=masterHomeInit".equals(fullpath) &&
-                !"/FPT/controller?command=mainPage".equals(fullpath) &&
-                !"/FPT/controller?command=mainPageByMaster".equals(fullpath) &&
-                !"/FPT/controller?command=mainPageByService".equals(fullpath) &&
-                !"/FPT/controller?command=mainPageByRating".equals(fullpath) &&
-                !"/FPT/controller?command=mainPageByMasterLogin".equals(fullpath) &&
-                !"/FPT/controller?command=mainPageByServiceName".equals(fullpath) &&
-                !"/FPT/controller?command=statusChange".equals(fullpath) &&
-                !"/FPT/controller?command=login".equals(fullpath) &&
-                !"/FPT/controller?command=logout".equals(fullpath)) {
+                !FEEDBACK_COMMAND.equals(fullpath) &&
+                !MASTER_HOME_COMMAND.equals(fullpath) &&
+                !MAIN_PAGE_COMMAND.equals(fullpath) &&
+                !SORT1_COMMAND.equals(fullpath) &&
+                !SORT2_COMMAND.equals(fullpath) &&
+                !SORT3_COMMAND.equals(fullpath) &&
+                !SORT4_COMMAND.equals(fullpath) &&
+                !SORT5_COMMAND.equals(fullpath) &&
+                !STATUS_CHANGE_COMMAND.equals(fullpath) &&
+                !LOGIN_COMMAND.equals(fullpath) &&
+                !LOG_OUT_COMMAND_PATH.equals(fullpath)&&
+                !CHANGE_LANGUAGE_COMMAND.equals(fullpath)
+        ) {
             logger.info("master tried to access permitted pages");
             request.getRequestDispatcher("/view/masterHome.jsp").forward(req, resp);
             return;
@@ -62,6 +69,6 @@ public class MasterFilter implements Filter {
 
     @Override
     public void destroy() {
-
+        //notodo
     }
 }

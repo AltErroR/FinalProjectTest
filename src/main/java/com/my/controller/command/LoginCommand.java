@@ -1,7 +1,6 @@
 package com.my.controller.command;
 
-import com.my.controller.service.imlementation.LoginServiceImpl;
-import org.apache.log4j.LogManager;
+import com.my.controller.service.implementation.LoginServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

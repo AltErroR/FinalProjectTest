@@ -2,11 +2,7 @@ package com.my.dao.mysql;
 
 import com.my.dao.DBManager;
 import com.my.dao.UserDao;
-import com.my.entity.Feedback;
-import com.my.entity.Master;
 import com.my.entity.User;
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,18 +59,19 @@ public class MySqlUserDao implements UserDao {
 
     @Override
     public User getUser(int id) {
-        User user = null;
+        User user;
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             connection = DBManager.getConnection();
-            ps = connection.prepareStatement(SELECT_USER);;
+            ps = connection.prepareStatement(SELECT_USER);
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (!rs.next()){
                 logger.error("no user data");
-                return null;}
+                return null;
+            }
             user= new User(rs.getInt(1),rs.getString(2));
             user.setPassword(rs.getString(3));
             user.setEmail(rs.getString(4));

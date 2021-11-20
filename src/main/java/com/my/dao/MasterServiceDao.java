@@ -12,5 +12,5 @@ public interface MasterServiceDao {
     List<MasterService> getAllMasterServices();
     List<MasterService> getAllMasterServicesByName(String query,String name,int offset,int limit);
     List<MasterService> getAllMasterServices(String query,int offset,int limit);
-    int getAmmount();
+    int getAmount();
 }

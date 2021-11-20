@@ -3,8 +3,6 @@ package com.my.dao.mysql;
 import com.my.dao.DBManager;
 import com.my.dao.FeedbackDao;
 import com.my.entity.Feedback;
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,7 +64,7 @@ public class MySqlFeedbackDao implements FeedbackDao {
 
     @Override
     public Feedback getFeedback(int id) {
-        Feedback feedback = null;
+        Feedback feedback;
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -93,7 +91,7 @@ public class MySqlFeedbackDao implements FeedbackDao {
     }
     @Override
     public Feedback getFeedback(int userId,String masterLogin) {
-        Feedback feedback = null;
+        Feedback feedback;
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;

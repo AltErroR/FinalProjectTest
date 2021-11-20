@@ -1,6 +1,7 @@
 package com.my.controller.command;
 
-import com.my.controller.service.imlementation.HomePageServiceImpl;
+import static com.my.constants.Constants.ROLE;
+import com.my.controller.service.implementation.HomePageServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +14,7 @@ public class HomePageCommand implements Command{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         logger.debug("try to redirect to homepage");
-        String role=request.getSession().getAttribute("role").toString();
+        String role=request.getSession().getAttribute(ROLE).toString();
         return homePageService.getHome(role);
     }
 }

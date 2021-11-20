@@ -28,8 +28,6 @@ public class SQLConstants {
     public static final String SELECT_FEEDBACK_BY_USER_MASTER="SELECT * FROM beauty_salon.feedback WHERE (user_id = ? and master_login= ?)";
     public static final String DELETE_FEEDBACK="DELETE FROM beauty_salon.feedback WHERE (id = ?)";
     public static final String SELECT_FEEDBACK_ID="SELECT id FROM beauty_salon.feedback";
-    public static final String SELECT_FEEDBACK_BY_USER ="SELECT * FROM beauty_salon.order" +
-            " where status = 'paid' && feedback_request = '1' && user_id=?";
 
     public static final String INSERT_INTO_MASTER = "INSERT INTO beauty_salon.master (login) VALUES (?)";
     public static final String UPDATE_MASTER ="UPDATE beauty_salon.master SET status = ?, rating = ? WHERE (login = ?)";
@@ -49,14 +47,10 @@ public class SQLConstants {
     public static final String SELECT_ORDER_ID="SELECT id FROM beauty_salon.order";
     public static final String SELECT_RESERVED_ORDERS ="SELECT * FROM beauty_salon.order where status = 'reserved'";
         public static final String SELECT_DONE_ORDERS ="SELECT * FROM beauty_salon.order where status = 'done'";
-
     public static final String SELECT_ORDERS_FOR_USER= "SELECT * From beauty_salon.order " +
             "WHERE date_slot = CURDATE() - 1 and status='paid' and user_id= ?";
     public static final String SELECT_ORDERS_FOR_MASTER= "SELECT * FROM beauty_salon.order \n" +
             " WHERE master_login = ? && date_slot = CURDATE()&& (status = 'reserved'||status = 'in progress')";
-//            "SELECT o.* FROM beauty_salon.order as o\n" +
-//            " inner join  beauty_salon.account as a on a.id = o.user_id \n" +
-//            "             WHERE o.master_login = ? && o.date_slot = CURDATE()";
 
     public static final String INSERT_INTO_SERVICE = "INSERT INTO beauty_salon.service (name) VALUES (?)";
     public static final String UPDATE_SERVICE ="UPDATE beauty_salon.service SET price = ? WHERE (name = ?)";

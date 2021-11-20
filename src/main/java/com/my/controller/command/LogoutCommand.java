@@ -1,6 +1,6 @@
 package com.my.controller.command;
 
-import com.my.controller.service.imlementation.LogoutServiceImpl;
+import com.my.controller.service.implementation.LogoutServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

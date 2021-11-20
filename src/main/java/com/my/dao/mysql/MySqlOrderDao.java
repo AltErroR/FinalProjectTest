@@ -69,7 +69,7 @@ public class  MySqlOrderDao implements OrderDao {
 
     @Override
     public Order getOrder(int id) {
-        Order order = null;
+        Order order ;
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -99,7 +99,7 @@ public class  MySqlOrderDao implements OrderDao {
     }
     @Override
     public Order getOrder(String masterLogin,String date,String time, String serviceName) {
-        Order order = null;
+        Order order;
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
