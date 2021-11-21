@@ -29,8 +29,8 @@ public class MySqlAdminDao implements AdminDao {
             throw new RuntimeException(e.getMessage());
         }
         finally {
-        DBManager.close(ps);
-        DBManager.close(connection);
+            DBManager.close(ps);
+            DBManager.close(connection);
         }
         return true;
     }

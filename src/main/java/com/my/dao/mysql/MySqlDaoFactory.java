@@ -2,7 +2,7 @@ package com.my.dao.mysql;
 
 import com.my.dao.*;
 
-public class MySqlDaoFactory extends DaoFactory {
+public class MySqlDaoFactory implements DaoFactory {
 
     MySqlUserDao mySqlUserDaoInstance;
     MySqlAdminDao mySqlAdminDaoInstance;

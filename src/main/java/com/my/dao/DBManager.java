@@ -17,16 +17,15 @@ public class DBManager {
     private static final Logger logger = LoggerFactory.getLogger(DBManager.class.getName());
 
     private static DataSource ds;
-    private static DBManager instance;
+//    private static DBManager instance;
+//    public static synchronized DBManager getInstance(){
+//        if(instance==null){
+//            instance= new DBManager();
+//        }
+//        return instance;
+//    }
 
     private DBManager() {}
-
-    public static synchronized DBManager getInstance(){
-        if(instance==null){
-            instance= new DBManager();
-        }
-        return instance;
-    }
 
     public static Connection getConnection() throws SQLException, NamingException {
         if(ds == null) {
