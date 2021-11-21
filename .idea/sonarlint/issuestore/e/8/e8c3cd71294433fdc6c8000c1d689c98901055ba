@@ -1,12 +1,6 @@
 
-`	java:S112!"FDefine and throw a dedicated exception instead of using a generic one.(Ê“Åıÿÿÿÿ
-`	java:S1126"FDefine and throw a dedicated exception instead of using a generic one.(Ê“Åıÿÿÿÿ
-`	java:S112Q"FDefine and throw a dedicated exception instead of using a generic one.(Ê“Åıÿÿÿÿ
-`	java:S112e"FDefine and throw a dedicated exception instead of using a generic one.(Ê“Åıÿÿÿÿ
-`	java:S112}"FDefine and throw a dedicated exception instead of using a generic one.(Ê“Åıÿÿÿÿ
-P
-java:S1128"3Remove this unused import 'com.my.entity.Feedback'.(æÆÔµ8õ¿èŞÒ/
-P
-java:S1128"3Remove this unused import 'org.apache.log4j.Level'.(Ùã¹¡8õ¿èŞÒ/
-Z
-java:S1128"8Remove this unused import 'org.apache.log4j.LogManager'.(Øê˜Ìüÿÿÿÿ8…ÀèŞÒ/
+`	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ê“Åıÿÿÿÿ
+`	java:S1123"FDefine and throw a dedicated exception instead of using a generic one.(Ê“Åıÿÿÿÿ
+`	java:S112N"FDefine and throw a dedicated exception instead of using a generic one.(Ê“Åıÿÿÿÿ
+`	java:S112b"FDefine and throw a dedicated exception instead of using a generic one.(Ê“Åıÿÿÿÿ
+`	java:S112z"FDefine and throw a dedicated exception instead of using a generic one.(Ê“Åıÿÿÿÿ

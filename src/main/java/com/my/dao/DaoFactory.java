@@ -22,7 +22,7 @@ public abstract class DaoFactory {
 
    public abstract UserDao getUserDao();
     public abstract AdminDao getAdminDao();
-    public abstract AccountDao getEmployeeDao();
+    public abstract AccountDao getAccountDao();
     public abstract FeedbackDao getFeedbackDao();
     public abstract MasterDao getMasterDao();
     public abstract OrderDao getOrderDao();

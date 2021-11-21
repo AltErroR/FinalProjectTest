@@ -1,6 +1,8 @@
 package com.my.controller.service.implementation;
 
 import com.my.controller.service.BookingService;
+import com.my.dao.*;
+import com.my.dao.mysql.MySqlDaoFactory;
 import com.my.dao.mysql.MySqlOrderDao;
 import com.my.entity.Order;
 import org.slf4j.Logger;
@@ -11,7 +13,8 @@ import static com.my.constants.Constants.SUCCESS_JSP;
 
 public class BookingServiceImpl implements BookingService {
     private static final Logger logger = LoggerFactory.getLogger(BookingServiceImpl.class);
-    MySqlOrderDao mySqlOrderDao= new MySqlOrderDao();
+    DaoFactory daoFactory= new MySqlDaoFactory();
+    OrderDao mySqlOrderDao= daoFactory.getOrderDao();
     @Override
     public String booking(String dateSlot,String timeSlot,String masterLogin,String serviceName,int userId) throws Exception {
 

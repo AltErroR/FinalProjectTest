@@ -1,10 +1,8 @@
 package com.my.controller.service.implementation;
 
 import com.my.controller.service.LoginService;
-import com.my.dao.mysql.MySqlAccountDao;
-import com.my.dao.mysql.MySqlAdminDao;
-import com.my.dao.mysql.MySqlMasterDao;
-import com.my.dao.mysql.MySqlUserDao;
+import com.my.dao.*;
+import com.my.dao.mysql.*;
 import com.my.entity.Account;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +16,11 @@ import static com.my.constants.Constants.*;
 
 public class LoginServiceImpl implements LoginService {
     private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
-    MySqlAccountDao mySqlAccountDao= new MySqlAccountDao();
-    MySqlAdminDao mySqlAdminDao= new MySqlAdminDao();
-    MySqlMasterDao mySqlMasterDao= new MySqlMasterDao();
-    MySqlUserDao mySqlUserDao= new MySqlUserDao();
+    DaoFactory daoFactory= new MySqlDaoFactory();
+    AccountDao mySqlAccountDao= daoFactory.getAccountDao();
+    AdminDao mySqlAdminDao= daoFactory.getAdminDao();
+    MasterDao mySqlMasterDao= daoFactory.getMasterDao();
+    UserDao mySqlUserDao= daoFactory.getUserDao();
     @Override
     public String login( HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession(false);

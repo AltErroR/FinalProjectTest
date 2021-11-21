@@ -1,6 +1,10 @@
 package com.my.controller.service.implementation;
 
 import com.my.controller.service.MainPageService;
+import com.my.dao.DaoFactory;
+import com.my.dao.MasterServiceDao;
+import com.my.dao.OrderDao;
+import com.my.dao.mysql.MySqlDaoFactory;
 import com.my.dao.mysql.MySqlMasterServiceDao;
 import com.my.entity.MasterService;
 import org.slf4j.Logger;
@@ -19,7 +23,8 @@ import static com.my.constants.SQLConstants.*;
 
 public class MainPageServiceImpl implements MainPageService {
     private static final Logger logger = LoggerFactory.getLogger(MainPageServiceImpl.class);
-    MySqlMasterServiceDao mySqlMasterServiceDao= new MySqlMasterServiceDao();
+    DaoFactory daoFactory= new MySqlDaoFactory();
+    MasterServiceDao mySqlMasterServiceDao= daoFactory.getMasterServiceDao();
     List<MasterService> searchList = new ArrayList<>();
     int noOfRecords=mySqlMasterServiceDao.getAmount();
     int page = 1;

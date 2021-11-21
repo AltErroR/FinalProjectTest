@@ -1,7 +1,12 @@
 package com.my.controller.service.implementation;
 
 import com.my.controller.service.AccountCreationService;
+import com.my.dao.AccountDao;
+import com.my.dao.DaoFactory;
+import com.my.dao.MasterDao;
+import com.my.dao.UserDao;
 import com.my.dao.mysql.MySqlAccountDao;
+import com.my.dao.mysql.MySqlDaoFactory;
 import com.my.dao.mysql.MySqlMasterDao;
 import com.my.dao.mysql.MySqlUserDao;
 import com.my.entity.Account;
@@ -13,14 +18,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.util.Date;
+
 import static com.my.constants.Constants.*;
 
 
 public class AccountCreationServiceImpl implements AccountCreationService {
     private static final Logger logger = LoggerFactory.getLogger(AccountCreationServiceImpl.class);
-        MySqlAccountDao mySqlAccountDao= new MySqlAccountDao();
-    MySqlUserDao mySqlUserDao= new MySqlUserDao();
-    MySqlMasterDao mySqlMasterDao= new MySqlMasterDao();
+    DaoFactory daoFactory= new MySqlDaoFactory();
+    AccountDao mySqlAccountDao= daoFactory.getAccountDao();
+    UserDao mySqlUserDao= daoFactory.getUserDao();
+    MasterDao mySqlMasterDao= daoFactory.getMasterDao();
         @Override
         public String creation(HttpServletRequest request, HttpServletResponse response) throws Exception {
             logger.debug("account creation");

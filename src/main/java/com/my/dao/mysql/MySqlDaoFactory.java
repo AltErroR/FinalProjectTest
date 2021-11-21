@@ -7,7 +7,7 @@ public class MySqlDaoFactory extends DaoFactory {
     MySqlUserDao mySqlUserDaoInstance;
     MySqlAdminDao mySqlAdminDaoInstance;
     MySqlMasterDao mySqlMasterDaoInstance;
-    MySqlAccountDao mySqlEmployeeDaoInstance;
+    MySqlAccountDao mySqlAccountDaoInstance;
     MySqlFeedbackDao mySqlFeedbackDaoInstance;
     MySqlOrderDao mySqlOrderDaoInstance;
     MySqlServiceDao mySqlServiceDaoInstance;
@@ -28,10 +28,10 @@ public class MySqlDaoFactory extends DaoFactory {
     }
 
     @Override
-    public AccountDao getEmployeeDao() {
-        if(mySqlEmployeeDaoInstance==null)
-            mySqlEmployeeDaoInstance= new MySqlAccountDao();
-        return mySqlEmployeeDaoInstance;
+    public AccountDao getAccountDao() {
+        if(mySqlAccountDaoInstance==null)
+            mySqlAccountDaoInstance= new MySqlAccountDao();
+        return mySqlAccountDaoInstance;
     }
 
     @Override

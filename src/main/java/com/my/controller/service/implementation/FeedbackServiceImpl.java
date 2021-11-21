@@ -1,6 +1,10 @@
 package com.my.controller.service.implementation;
 
 import com.my.controller.service.FeedbackService;
+import com.my.dao.DaoFactory;
+import com.my.dao.FeedbackDao;
+import com.my.dao.OrderDao;
+import com.my.dao.mysql.MySqlDaoFactory;
 import com.my.dao.mysql.MySqlFeedbackDao;
 import com.my.entity.Feedback;
 import org.slf4j.Logger;
@@ -15,7 +19,8 @@ import static com.my.constants.Constants.*;
 
 public class FeedbackServiceImpl implements FeedbackService {
     private static final Logger logger = LoggerFactory.getLogger(FeedbackServiceImpl.class);
-    MySqlFeedbackDao mySqlFeedbackDao= new MySqlFeedbackDao();
+    DaoFactory daoFactory= new MySqlDaoFactory();
+    FeedbackDao mySqlFeedbackDao=daoFactory.getFeedbackDao();
     List<Feedback> feedbacks= new ArrayList<>();
     @Override
     public String feedbackInit(HttpServletRequest request, HttpServletResponse response) throws Exception {

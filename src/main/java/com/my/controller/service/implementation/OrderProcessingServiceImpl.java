@@ -1,6 +1,11 @@
 package com.my.controller.service.implementation;
 
 import com.my.controller.service.OrderProcessingService;
+import com.my.dao.DaoFactory;
+import com.my.dao.OrderDao;
+import com.my.dao.ServiceDao;
+import com.my.dao.UserDao;
+import com.my.dao.mysql.MySqlDaoFactory;
 import com.my.dao.mysql.MySqlOrderDao;
 import com.my.dao.mysql.MySqlServiceDao;
 import com.my.dao.mysql.MySqlUserDao;
@@ -21,9 +26,11 @@ import static com.my.constants.Constants.*;
 
 public class OrderProcessingServiceImpl implements OrderProcessingService {
     private static final Logger logger = LoggerFactory.getLogger(OrderProcessingServiceImpl.class);
-    MySqlOrderDao mySqlOrderDao = new MySqlOrderDao();
-    MySqlUserDao mySqlUserDao = new MySqlUserDao();
-    MySqlServiceDao mySqlServiceDao = new MySqlServiceDao();
+    DaoFactory daoFactory= new MySqlDaoFactory();
+    OrderDao mySqlOrderDao= daoFactory.getOrderDao();
+    UserDao mySqlUserDao = daoFactory.getUserDao();
+    ServiceDao mySqlServiceDao = daoFactory.getServiceDao();
+
     @Override
     public String updateOrder(HttpServletRequest request, HttpServletResponse response) {
         String time =request.getParameter(TIME);
